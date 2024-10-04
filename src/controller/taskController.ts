@@ -82,7 +82,9 @@ export const taskStatusController = async (req: Request, res: Response) => {
         const id = req?.params?.id
         const status = req?.query?.status
         await Tasks.updateOne({ _id: id }, { $set: { completed: status } })
-        const data = await Tasks.findOne({ _id: id })
+        const data = await Tasks.findOne({ _id: id }).populate({
+            path: 'assignedTo',
+        });
         res.status(200).json({ status: 'success', data })
     } catch (error: any) {
         console.log(error)
