@@ -31,7 +31,8 @@ const TasksSchema = new mongoose_1.Schema({
     assignedTo: [{ type: mongoose_1.Schema.Types.ObjectId, required: true, ref: 'Users' }],
     start: { type: Date, required: true },
     end: { type: Date, required: true },
-    date: { type: Date, required: true }
+    date: { type: Date, required: true },
+    completed: { type: Boolean }
 }, { timestamps: true });
 const Tasks = mongoose_1.default.model('Tasks', TasksSchema);
 exports.default = Tasks;

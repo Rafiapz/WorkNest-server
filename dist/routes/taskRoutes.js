@@ -8,5 +8,6 @@ router.use(userMiddleware_1.authMiddleware);
 router.route('/add-task').post(taskController_1.addTaskController);
 router.route('/fetch-my-tasks').get(taskController_1.fetchMyTasksController);
 router.route('/edit-task/:id').put(taskController_1.editTaskController);
+router.route('/task-status-update/:id').put(taskController_1.taskStatusController);
 router.route('/delete-task/:id').delete(taskController_1.deleteTaskController);
 exports.default = router;

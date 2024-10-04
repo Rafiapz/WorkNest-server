@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.deleteTaskController = exports.editTaskController = exports.fetchMyTasksController = exports.addTaskController = void 0;
+exports.taskStatusController = exports.deleteTaskController = exports.editTaskController = exports.fetchMyTasksController = exports.addTaskController = void 0;
 const taskValidation_1 = require("../validation/taskValidation");
 const taskModel_1 = __importDefault(require("../model/taskModel"));
 const addTaskController = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
@@ -88,3 +88,18 @@ const deleteTaskController = (req, res) => __awaiter(void 0, void 0, void 0, fun
     }
 });
 exports.deleteTaskController = deleteTaskController;
+const taskStatusController = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    var _a, _b;
+    try {
+        const id = (_a = req === null || req === void 0 ? void 0 : req.params) === null || _a === void 0 ? void 0 : _a.id;
+        const status = (_b = req === null || req === void 0 ? void 0 : req.query) === null || _b === void 0 ? void 0 : _b.status;
+        yield taskModel_1.default.updateOne({ _id: id }, { $set: { completed: status } });
+        const data = yield taskModel_1.default.findOne({ _id: id });
+        res.status(200).json({ status: 'success', data });
+    }
+    catch (error) {
+        console.log(error);
+        res.status(500).json({ status: 'error', message: (error === null || error === void 0 ? void 0 : error.message) || 'internal server error' });
+    }
+});
+exports.taskStatusController = taskStatusController;

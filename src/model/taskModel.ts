@@ -8,6 +8,7 @@ export interface ITasks {
     date: Date;
     start: Date;
     end: Date;
+    completed?:Boolean;
 }
 
 const TasksSchema: Schema = new Schema({
@@ -17,7 +18,8 @@ const TasksSchema: Schema = new Schema({
     assignedTo: [{ type: Schema.Types.ObjectId, required: true, ref: 'Users' }],
     start: { type: Date, required: true },
     end: { type: Date, required: true },
-    date: { type: Date, required: true }
+    date: { type: Date, required: true },
+    completed:{type:Boolean}
 
 }, { timestamps: true });
 

@@ -76,3 +76,17 @@ export const deleteTaskController = async (req: Request, res: Response) => {
     }
 }
 
+export const taskStatusController = async (req: Request, res: Response) => {
+    try {
+
+        const id = req?.params?.id
+        const status = req?.query?.status
+        await Tasks.updateOne({ _id: id }, { $set: { completed: status } })
+        const data = await Tasks.findOne({ _id: id })
+        res.status(200).json({ status: 'success', data })
+    } catch (error: any) {
+        console.log(error)
+        res.status(500).json({ status: 'error', message: error?.message || 'internal server error' })
+    }
+}
+

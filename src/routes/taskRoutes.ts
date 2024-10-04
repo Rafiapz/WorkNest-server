@@ -1,6 +1,6 @@
 import { Router } from 'express'
 import { authMiddleware } from '../middleware/userMiddleware'
-import { addTaskController, deleteTaskController, editTaskController, fetchMyTasksController } from '../controller/taskController'
+import { addTaskController, deleteTaskController, editTaskController, fetchMyTasksController, taskStatusController } from '../controller/taskController'
 
 const router = Router()
 
@@ -11,6 +11,8 @@ router.route('/add-task').post(addTaskController)
 router.route('/fetch-my-tasks').get(fetchMyTasksController)
 
 router.route('/edit-task/:id').put(editTaskController)
+
+router.route('/task-status-update/:id').put(taskStatusController)
 
 router.route('/delete-task/:id').delete(deleteTaskController)
 
