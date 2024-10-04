@@ -94,7 +94,9 @@ const taskStatusController = (req, res) => __awaiter(void 0, void 0, void 0, fun
         const id = (_a = req === null || req === void 0 ? void 0 : req.params) === null || _a === void 0 ? void 0 : _a.id;
         const status = (_b = req === null || req === void 0 ? void 0 : req.query) === null || _b === void 0 ? void 0 : _b.status;
         yield taskModel_1.default.updateOne({ _id: id }, { $set: { completed: status } });
-        const data = yield taskModel_1.default.findOne({ _id: id });
+        const data = yield taskModel_1.default.findOne({ _id: id }).populate({
+            path: 'assignedTo',
+        });
         res.status(200).json({ status: 'success', data });
     }
     catch (error) {
